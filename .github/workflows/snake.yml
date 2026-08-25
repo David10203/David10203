@@ -1,26 +1,25 @@
 name: Generate Snake
 
-on:
-workflow_dispatch:
+"on":
+  workflow_dispatch:
 
 jobs:
-snake:
-runs-on: ubuntu-latest
+  snake:
+    runs-on: ubuntu-latest
 
-permissions:
-  contents: write
+    permissions:
+      contents: write
 
-steps:
-  - name: Generate snake
-    uses: Platane/snk@v3
-    with:
-      github_user_name: David10203
-      outputs: dist/github-contribution-grid-snake.svg
+    steps:
+      - name: Generate contribution snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: David10203
+          outputs: dist/github-contribution-grid-snake.svg
 
-  - name: Deploy
-    uses: crazy-max/ghaction-github-pages@v4
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      build_dir: dist
-
+      - name: Push snake to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          build_dir: dist
